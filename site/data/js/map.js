@@ -117,6 +117,5 @@ document.getElementById('neighbor-name-input').addEventListener('keypress', func
 
 export {
     initMap,
-    loadAllData,
     searchNeighbor,
 };
