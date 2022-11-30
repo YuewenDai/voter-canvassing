@@ -1,4 +1,5 @@
 import { htmlToElement } from './template-tools.js';
+import { searchNeighbor } from './map.js';
 
 function showVoterInList(stopsToShow, stopList) {
   stopList.innerHTML = '';

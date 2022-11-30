@@ -1,4 +1,4 @@
-//set initial map
+//set initial map using leaflet
 function initMap() {
     const map = L.map('map', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
 

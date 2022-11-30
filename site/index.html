@@ -11,23 +11,36 @@
   </head>
 
   <body>
+<!-- 搜索框的占位 -->
     <div id="search-bar">
       <input type="text" id="neighbor-name-input" placeholder="Enter voter file number...">
       <button id="neighbor-name-search">search</button>
     </div>
+<!-- 地图的位置 -->
     <div id="map" class="map"></div>
+<!-- loading 输入的占位 -->
     <div id="load-overlay" class="load-overlay">Loading...</div>
+<!-- 输入成功的占位 -->
     <div id="toast" class="toast hidden"></div>
-
+<!--  -->
     <div id="voter-info" class="voter-info">
       <h2 id="voter-name"></h2>
       <textarea id="voter-notes" class="voter-notes" placeholder="Notes..."></textarea>
       <button id="save-voter-notes" class="save-voter-notes">Save</button>
     </div>
-    </div>
-      <div id = "voter-list-container">
-      <ul id = "voter-list"></ul>
-    </div>
+<!-- 表格占位 id = voterList 有用-->
+<div class="list-container">
+  <div class="input-group">
+      <input id="voterFileInput" type="text" class="form-control" placeholder="Enter A List">
+      <span class="input-group-btn">
+          <button class="btn btn-default" id="voterFileLoadButton" type="button">Load List</button>
+      </span>
+  </div>
+  <div class="lists-group" >
+      <div id="voterList" class="list-group"></div>
+  </div>
+</div>
+<!--  -->
     <script src="papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.min.js" integrity="sha512-QPePsP1y4BuymxYZEuQdJ4dsUzZR9MmyrMOLK//zHK4ZoDfMA7zQOJefboRSIm6QKCfzC7djwDOO/+0f72w7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="js/main.js"></script>
