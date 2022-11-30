@@ -1,4 +1,6 @@
 //set initial map using leaflet
+import { showVoterInList } from './voter-list.js'
+
 function initMap() {
     const map = L.map('map', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
 
@@ -63,6 +65,7 @@ function makeVoterFeature(voter) {
 
 //turn csv to array
 function loadData (map, neighbor, onFailure){
+let voter_list = document.querySelector("#voterList");
 fetch(`./voters_lists/${neighbor}.csv`)
   .then(response => {
     if (response.status === 200) {
@@ -79,7 +82,12 @@ fetch(`./voters_lists/${neighbor}.csv`)
     let v = result.data.slice(1, result.data.length-1);
     return v;
 })
-  .then(result => showVotersOnMap(map, result));
+  .then(result => {
+    showVotersOnMap(map, result);
+    return result;})
+  .then(result =>{
+    showVoterInList (result, voter_list)
+  });
 }
 
 //reset position to input neighbor
@@ -120,4 +128,5 @@ document.getElementById('neighbor-name-input').addEventListener('keypress', func
 export {
     initMap,
     searchNeighbor,
+    loadData,
 };

@@ -11,11 +11,6 @@
   </head>
 
   <body>
-<!-- 搜索框的占位 -->
-    <div id="search-bar">
-      <input type="text" id="neighbor-name-input" placeholder="Enter voter file number...">
-      <button id="neighbor-name-search">search</button>
-    </div>
 <!-- 地图的位置 -->
     <div id="map" class="map"></div>
 <!-- loading 输入的占位 -->
@@ -30,10 +25,10 @@
     </div>
 <!-- 表格占位 id = voterList 有用-->
 <div class="list-container">
-  <div class="input-group">
-      <input id="voterFileInput" type="text" class="form-control" placeholder="Enter A List">
+  <div class="search-bar">
+      <input id="neighbor-name-input" type="text" class="form-control" placeholder="Enter voter file number...">
       <span class="input-group-btn">
-          <button class="btn btn-default" id="voterFileLoadButton" type="button">Load List</button>
+          <button class="btn btn-default" id="neighbor-name-search" type="button">Search</button>
       </span>
   </div>
   <div class="lists-group" >
