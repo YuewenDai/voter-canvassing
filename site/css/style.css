@@ -15,9 +15,13 @@ body {
     height: 40%;
   }
 
-  #voter-list-container {
-    height: 40%;
-    width: 40%;
+
+  .voter-info{
+    padding: 1rem;
+  }  
+
+  .list-container{
+    height:40%;
     overflow-y: scroll;
     padding: 1rem;
     padding-top: 0;
