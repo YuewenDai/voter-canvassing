@@ -1,5 +1,16 @@
 //set initial map using leaflet
 import { showVoterInList } from './voter-list.js'
+import {showvoterDataInForm, initvoterInfoForm} from './voter-info-form.js'
+import { loadNotes, saveNotes } from './inventory.js';
+import { initToast, showToast } from './toast.js';
+
+function onvoterClicked(evt) {
+  console.log(evt);
+  const voter = evt.layer.feature;
+
+  const voterSelectedEvent = new CustomEvent('voter-selected', { detail: { voter } });
+  window.dispatchEvent(voterSelectedEvent);
+}
 
 function initMap() {
     const map = L.map('map', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
@@ -20,11 +31,15 @@ function initMap() {
         stroke: false,
       },
     }).addTo(map);
+    
+    //no use; never called
+    map.treeLayer.addEventListener('click', onvoterClicked);
 
     map.positionLayer = L.geoJSON(null).addTo(map);
 
     return map;
   }
+  
 
 //turn array into feature
 function makeVoterFeature(voter) {
@@ -33,6 +48,7 @@ function makeVoterFeature(voter) {
       "id": voter['ID Number'],
       "properties": {
         'First_Name': voter['First Name'],
+        'Last_Name':voter['Last Name'],
       },
       "geometry": {
         "type": "Point",
@@ -61,11 +77,39 @@ function makeVoterFeature(voter) {
     },
   })
   .addTo(map);
+  map.VoterLayers.addEventListener('click', onvoterClicked);
+}
+
+//`onSaveClicked` will be called if and when the save button on the voter info form is clicked
+function onSaveClicked(evt) {
+  const note = evt.detail.note;
+  const voterId = app.currentvoter.properties['ID Number'];
+  app.notes[voterId] = note;
+
+  saveNotes(app.notes);
+  showToast('Saved!', 'toast-success');
+
+}
+
+// `onvoterSelected` will be called if and when the user clicks on a voter on the map
+function onvoterSelected(evt) {
+  const voter = evt.detail.voter;
+  app.currentvoter = voter;
+
+  const voterId = voter.properties['ID Number'];
+  const notes = app.notes[voterId] || '';
+  showvoterDataInForm(voter, notes);
+}
+
+  function setupInteractionEvents() {
+  window.addEventListener('voter-selected', onvoterSelected);
+  window.addEventListener('save-clicked', onSaveClicked);
 }
 
 //turn csv to array
 function loadData (map, neighbor, onFailure){
 let voter_list = document.querySelector("#voterList");
+
 fetch(`./voters_lists/${neighbor}.csv`)
   .then(response => {
     if (response.status === 200) {
@@ -86,8 +130,15 @@ fetch(`./voters_lists/${neighbor}.csv`)
     showVotersOnMap(map, result);
     return result;})
   .then(result =>{
-    showVoterInList (result, voter_list)
-  });
+    showVoterInList (result, voter_list);
+  })
+  //需要提取单个点数据，或许要另起一个fetch data？
+  /*  .then(result=>{
+    makeVoterFeature(result);
+  });  */
+  
+  
+  
 }
 
 //reset position to input neighbor
@@ -125,8 +176,23 @@ document.getElementById('neighbor-name-input').addEventListener('keypress', func
 });
 }
 
+function updateUserPositionOn(map, pos) {
+  map.positionLayer.addData({
+    'type': 'Point',
+    'coordinates': [pos.coords.longitude, pos.coords.latitude],
+  });
+  map.setView([pos.coords.latitude, pos.coords.longitude], 19);
+}
+
+loadNotes(notes => {
+  app.notes = notes;
+  setupInteractionEvents();
+});
+
 export {
     initMap,
     searchNeighbor,
     loadData,
+    updateUserPositionOn,
+
 };
