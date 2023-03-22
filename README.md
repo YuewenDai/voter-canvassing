@@ -9,11 +9,11 @@ Team members:
 
 This web app is used to empower a canvasser to help ensure that people are informed about voting.
 
-## Features
+## App functions
 
 A mobile-friendly website with a map you can interact with that each location pops up the details a canvasser would need before they visited that address and then an interactive pop up to add info on the outcome of the session.
 
-This is a:
+This app has functions include:
 * Mobile-friendly website
 * Map marker for each residence
 * Clicking on a map marker will pop up details about...
