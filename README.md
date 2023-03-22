@@ -1,6 +1,6 @@
 # Voter Canvassing App
 
-Team members:
+Author:
 * Yuhao Jia
 * Yuewen Dai
 * Zile Wu
