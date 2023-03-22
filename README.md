@@ -7,7 +7,7 @@ Author:
 
 ## Purpose
 
-This web app is used to empower a canvasser to help ensure that people are informed about voting.
+This web app is used to empower a canvasser to help ensure that people are informed about voting. You can check the app [HERE].
 
 ## App functions
 
@@ -33,8 +33,3 @@ This app has functions including:
 * Prioritized list of where to go next
 * Color coded markers based on status (not yet visited, need to return, additional action required, etc.)
 * Some notion of apartment vs single-family house
-
-And maybe additional things like:
-* Dashboard showing summarized information from both the voter rolls and from your interactions
-* Gamification like percentage progress through a list
-* Further filters
