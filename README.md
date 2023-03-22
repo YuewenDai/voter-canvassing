@@ -7,7 +7,7 @@ Author:
 
 ## Purpose
 
-This web app is used to empower a canvasser to help ensure that people are informed about voting. You can check the app [HERE].
+This web app is used to empower a canvasser to help ensure that people are informed about voting. You can check the app [HERE](/voter-canvassing/site).
 
 ## App functions
 
